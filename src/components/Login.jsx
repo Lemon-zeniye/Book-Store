@@ -1,19 +1,15 @@
 import {useState} from "react";
 import styled from "styled-components"; 
 const Login = () => {
-const [user, setUser] = useState({email:"", password: ""});
-const loginHandeler = (e) => {
-    e.preventDefault();
-}
     return(
         <Container>
             <FormContainer>
                 <h2>Login</h2>
-                <form onSubmit={(e) => loginHandeler(e)} >
+                <form>
                     <label htmlFor="email">Email
-                    <input onChange={(e) => setUser({email: e.target.value})} type="email" placeholder="your email pleace" /></label>
+                    <input type="email" placeholder="your email pleace" /></label>
                     <label htmlFor="password">Password
-                    <input onChange={(e) => setUser({password: e.target.value})}  name="password" type="password" placeholder="your password pleace"/></label>
+                    <input  name="password" type="password" placeholder="your password pleace"/></label>
                     <button>Login</button>  
                 </form>
             </FormContainer>
