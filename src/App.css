@@ -36,3 +36,33 @@
     transform: rotate(360deg);
   }
 }
+
+/* import axios from "axios";
+import { useState, useEffect } from "react";
+const App = () => {
+
+ const apiKey = `AIzaSyAbgiFC0rJLvEAzChTALGL1um-SxMQk0z4`;
+ const [datas, setDatas] = useState([]);
+//  let img = `https://covers.openlibrary.org/b/id/56789.jpg` ;
+  const fetchData = async () => {
+    // const responce = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=popular:keyes&key=${apiKey}`);
+    const responce = await axios.get(`http://openlibrary.org/search.json?title=the+lord+of+the+rings`);
+    const books = await responce.json();
+    
+    setDatas(books);
+    //  img = await axios.get(`https://covers.openlibrary.org/b/id/${imgUrl}.jpg`);
+    console.log(books);
+    console.log("what");
+    console.log(datas);
+
+  }
+  useEffect(() => {
+    fetchData();
+  },[]);
+  return(
+    <div>
+      
+    </div>
+  )
+}
+export default App; */

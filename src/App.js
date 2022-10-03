@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import HomePage from "./components/HomePage";
+import Navbar from "./components/Navbar";
+import styled from "styled-components";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import BookDetail from "./components/BookDetail";
+import {BrowserRouter , Route, Routes } from "react-router-dom";
+import { BooksProvider } from "./components/BooksContext";
+import Favorite from "./components/Favorite";
+import BookStore from "./components/BookStore";
+import BookOnCart from "./components/BookOnCart";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+const App = () => {
+  return( 
+  <Main>
+    <BooksProvider>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+            <Route exact path="/" element={<HomePage />} />
+            <Route path="login" element={<Login /> }/>
+            <Route exact path="register" element={<Register />} />
+            <Route exact path="books/:BookId" element={<BookDetail />} />
+            <Route exact path="favorite" element={<Favorite />} />
+            <Route exact path="bookStore" element={<BookStore />} />
+            <Route exact path="cart" element={<BookOnCart />} />
+        </Routes>
+        {/* <Footer /> */}
+      </BrowserRouter>
+    </BooksProvider>
+</Main>
+  )
 }
-
+const Main = styled.div`
+`
 export default App;
