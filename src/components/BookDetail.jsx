@@ -26,7 +26,7 @@ const BookDetail = () => {
             }
         }
         getDataById();
-    },[]);
+    },[docRef]);
     return(
         <Container>
             <ImageContainer>

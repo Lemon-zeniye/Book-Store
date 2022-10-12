@@ -36,7 +36,7 @@ const  UpdateBook = () => {
             }
         }
         getDataById();
-    },[]);
+    },[docRef]);
   return (
     <div>
          <BookForm id={par.id} book={book} updateBook={updateBook} />
