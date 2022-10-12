@@ -1,17 +1,36 @@
 import styled from "styled-components";
-import { useContext } from "react";
-import { BooksContext } from "./BooksContext";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { db } from "../fireBaseConfig";
+import { getDoc, doc } from "firebase/firestore";
+
 const BookDetail = () => {
     const {BookId} = useParams();
-    //AIzaSyBegwL2CBBVChTQn0t9sk-cOhSd7MIc-Sc
-    const [books, setBooks] = useContext(BooksContext);
-    const updateFavorite = books.map(b => books[BookId].id === b.id  ? {...b, favorite: !b.favorite}: b);
+    const [book, setBook] = useState([]);
 
+    // const [books, setBooks] = useContext(BooksContext);
+    // const updateFavorite = books.map(b => books[BookId].id === b.id  ? {...b, favorite: !b.favorite}: b);
+    const docRef = doc(db, "Books", BookId);
+    useEffect(() => {
+        const getDataById = async () => {
+            try {
+                const docSnap = await getDoc(docRef);
+                if(docSnap.exists()){
+                    setBook(await docSnap.data());
+                }else{
+                    console.log("Document dose not eists");
+                }
+
+            }catch(err){
+                console.log(err);
+            }
+        }
+        getDataById();
+    },[]);
     return(
         <Container>
             <ImageContainer>
-                <img src={books[BookId].img} alt=" " />
+                <img src={book.image} alt=" " />
             </ImageContainer>
             <Decription>
                 <h2>Big Magic: Creative Living Beyond Fear</h2>
@@ -26,11 +45,11 @@ const BookDetail = () => {
                 <h4>55 $</h4>
                 <div>
                     <button>Add To Cart</button>
-                    {
+                    {/* {
                                 books[BookId].favorite === false ? 
                                 <i onClick={() => setBooks(updateFavorite)}  className="fa-regular fa-heart"></i> :
                                  <i onClick={() => setBooks(updateFavorite)}  className="fa-solid fa-heart"></i>
-                            }
+                            } */}
                     
                 </div>
                 <p className="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat culpa, accusamus soluta odit quod aliquam incidunt perspiciatis dolorum? Maxime autem numquam quaerat quisquam aspernatur! A doloremque doloribus unde vitae error aspernatur, porro exercitationem accusantium facere reiciendis quam autem mollitia rerum, aliquam ad nihil! Eligendi, harum. </p>

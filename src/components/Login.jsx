@@ -71,3 +71,88 @@ const FormContainer = styled.div`
     }
 `
 export default Login;
+// # Review
+
+// ## You didn't ASK anything at all!
+// => NOT ASKING === ASSUMING ON YOUR OWN --- really bad!!!!!!
+
+// ==> To figure out the REAL requirement
+
+//  -what is needed?
+//  -what should it include?
+//  -what should it look like?
+//  -what functionality do you want to have?
+//  -Among many functionalities, which one should be the highest priority?
+
+// => Functionalities:
+
+// => Add a book
+// => Update a book
+// => Search
+// => Delete
+
+// => Priority?
+// => Add a book  => Pri 0
+// => Update a book => Pri 1
+// => Search =>  Pri 2
+// => Delete =>  Pri 3
+
+// Remeber: lowest pri number such as 0 has highest priority than higher number such as 1, 2 or 3
+
+// ==> Info about Books:
+
+// -title: [20 chars]
+// -price: number
+// -cover type: [hard cover, paperback]
+// -description: [200 chars]
+// -pages: number
+// -authors: Author[]
+// -condition: [new, likeNew, used, old]
+// -category: [fiction, textbook, ....]
+// -publisher
+// -yearPublished
+// -ISBN
+
+// ==> Info about Author:
+// -First name
+// -Middle name
+// -Last Name
+// -Address: .....
+// -Contact: .....
+
+// ==>Info about Publisher
+// -name
+// -address
+
+// ==> UI Look and feel (Mock up/wireframe)
+
+//  Inerview: write a function to revese a string (abebe=>ebeba)
+//  Q: null? what if it has . !? how about if its just 1 char long?./..... 
+
+// useState(() => { const data = localStorage.getItems(key) return data : intinalState } )
+/*
+
+const [Books, setBooks] = useState({name: props.name ? props.name :  "", price: "" , autore: ""})
+
+
+
+Adventure
+Classics
+Crime
+Fairy tales
+Fantasy
+Historical fiction
+Horror
+Mystery
+Romance
+Comic book
+
+new
+like new
+used
+old
+
+
+
+
+ */

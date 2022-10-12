@@ -1,18 +1,21 @@
 import styled from "styled-components";
 import avater from "../images/th.jpg";
 import {Link} from "react-router-dom";
-const Navbar = () => {
+const Navbar = ({setSearch}) => {
     return(
         <Container>
             <Hyperlink to="/">Books</Hyperlink>
             <ul>
-                <FavLink to="/bookstore">Book Store</FavLink>
-                <FavLink to="/favorite">My Favorite</FavLink>
+                {/* <FavLink to="/bookstore">Book Store</FavLink>
+                <FavLink to="/favorite">My Favorite</FavLink> */}
+                <input type="text" onChange={(e) => setSearch(e.target.value)} placeholder="search for your favorite book" />
+                <Button>Search</Button>
             </ul>
             <div>
                 <p>Hi, Lee</p>
                 <img src={avater} alt="" />
             </div>
+             <Link to="addBook" > <Button2>Add Book</Button2></Link> 
             <FavLink to="/cart">
                 <i className="fa-sharp fa-solid fa-cart-shopping"></i>
             </FavLink>
@@ -25,6 +28,7 @@ const Container = styled.div`
     z-index: 20;
     display: flex;
     align-items: flex-end;
+    justify-content: space-around;
     padding: 1rem 3rem;
     height: 4rem;
     background-color: #f5f0f8;
@@ -32,20 +36,29 @@ const Container = styled.div`
         padding: 1rem .3rem;
     }
     ul{
-        flex: 2;
         display: flex;
         list-style: none;
-        li{
+        width: 100%;
+        margin: 0 .3rem;
+        max-width: 40rem;
+        background-color: tomato;
+        input{
+            width: 100%;
+            border: none;
+            outline: none;
+            padding:.5rem;
+        }
+        /* li{
             margin: 0 1rem;
             cursor: pointer;
             @media(max-width: 800px){
                 margin: 0 .3rem;
                 font-size: .9rem;
             }
-        }
+        } */
     }
     div{
-        flex: .7;
+        margin: 0 .3rem;
         display: flex;
         align-items: center;
         @media(max-width: 800px){
@@ -61,7 +74,7 @@ const Container = styled.div`
     }
 `
 const Hyperlink = styled(Link)`
-        flex: 1;
+        margin: 0 .3rem;
         cursor: pointer;
         color: #1d8c7f;
         text-decoration: none;
@@ -71,8 +84,35 @@ const Hyperlink = styled(Link)`
             color: #22c2b0;
         }
 `
+ const Button = styled.button`
+        border: none;
+        padding: .2rem 1rem;
+        background-color: #1d8c7f;
+        color: white;
+        cursor: pointer;
+        outline: none;
+        &:hover{
+            background-color: #1eb8a6;
+        }
+
+ `
+ const Button2 = styled.button`
+        margin: .5rem;
+        padding: .3rem 1rem;
+        border: none;
+        background-color: #50c5b7;
+        border-radius: .3rem;
+        color: white;
+        cursor: pointer;
+        &:hover{
+            background-color: #2c6e66;
+        }
+ `
+            
+    
+
 const FavLink = styled(Link)`
-    margin: 0 1rem;
+    margin: 0 .3rem;
     cursor: pointer;
     text-decoration: none;
     color: black;

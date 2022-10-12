@@ -22,9 +22,10 @@ import img21 from "../images/cover21.jpg";
 import img22 from "../images/cover22.jpg";
 import img23 from "../images/cover23.jpg";
 import img24 from "../images/cover24.avif";
+import {createContext,useEffect, useState} from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../fireBaseConfig";
 
-
-import { createContext, useState } from 'react';
 const datas = [
     {
         id: 0,
@@ -316,11 +317,22 @@ const datas = [
         onCart: false,
         numOfBook: 1
     }];
+
+
+
 export const BooksContext = createContext();
 
 
 export const BooksProvider = (props) => {
-const [books, setBooks] = useState(datas);
+const [books, setBooks] = useState([]);
+const booksCollectonRef = collection(db, "Books");
+useEffect(() => {
+    const getBooks = async () => {
+        const data = await getDocs(booksCollectonRef);
+        setBooks(data.docs.map(doc => ({...doc.data(), id: doc.id})));
+    }
+    getBooks();
+},[]);
 
     return(
         <BooksContext.Provider value = {[books, setBooks]}>

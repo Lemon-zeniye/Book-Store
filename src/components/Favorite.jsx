@@ -9,7 +9,6 @@ useEffect(() => {
     const data = books.filter(book => book.favorite === true);
     setFavBooks(data);
 },[books]);     
-
     return(
     <>
         {

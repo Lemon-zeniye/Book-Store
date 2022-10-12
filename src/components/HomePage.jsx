@@ -2,10 +2,12 @@ import styled from "styled-components";
 import book1 from "../images/book1.avif";
 import book from "../images/book.jpg";
 import book4 from '../images/book4.jpg';
-import Popular from "./Popular";
+import BookStore from "./BookStore";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const HomePage = () => {
+    const [search, setSearch] = useState('');
     return(
     <div>
         <Container>
@@ -14,22 +16,22 @@ const HomePage = () => {
                 <p>Lorem  dignissimos eum doloremque, voluptate impedit iusto in nobis. Nobis, numquam adipisci.
                 </p>
                 <form>
-                    <input type="text" placeholder="search for books" />
+                    <input onChange={(e) => setSearch(e.target.value)} type="text" placeholder="search for books" />
                     <button>Search</button>
                 </form>
                 <div>
                    <Link to="login"><button className="login">Login</button></Link> 
                    <Link to="register" ><button className="registor">Registor</button></Link>
-                
                 </div>
             </InnerContainer>
+        
             <ImgContainer>
                <img className="below" src={book}  alt=""/>
                <img className="top" src={book4}  alt=""/>
                <img className="left" src={book1}  alt=""/>
             </ImgContainer>
         </Container>
-        <Popular />
+        <BookStore search={search} />
     </div>
     )
 }
