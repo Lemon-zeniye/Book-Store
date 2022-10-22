@@ -1,5 +1,5 @@
   import styled from "styled-components";
-  import { useContext, useState, useEffect  } from "react";
+  import { useContext  } from "react";
   import { BooksContext} from "./BooksContext";
   import { Splide, SplideSlide } from '@splidejs/react-splide';
   import '@splidejs/react-splide/css';
