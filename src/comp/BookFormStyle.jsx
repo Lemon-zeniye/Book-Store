@@ -29,6 +29,7 @@
         
     `
     export const InputCon = styled.div`
+        background-color: #F3F4F9;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-around;
@@ -37,23 +38,31 @@
             font-size: .9rem;
             font-weight: bold;
             margin: 1rem;
+            input.correct{
+                background-color: lightgreen;
+            }
             input, select{
                 width: 12rem;
                 display: block;
                 padding: .5rem 1rem;
                 margin-top: .5rem;
-                border: .5px solid lightgray;
+                background-color: #ededed;
                 outline: none;
+                border: none;
                 border-radius: .3rem;
                 option[disabled]{
                     color: red;
                 }
                 &:focus{
-                    box-shadow: 0px 0px 8px 2px rgba( 92, 92, 92 , 0.34 ) ;
-                    &::placeholder {
-                    color: transparent;
-                    transition: color .3s ease;
-                    }
+                    box-shadow: 0px 0px 8px 2px #ffd5d5;
+                    border: .5px solid #febaba;
+                    background-color: white;
+                }
+                &:hover{
+                    box-shadow: 0px 0px 8px 2px #ffd5d5;
+                    background-color: white;
+                    /* color: #fe4444; */
+
                 }
         }
     }   
@@ -85,6 +94,7 @@
 
     export const BottomCon = styled.div`
             margin-left: 2rem;
+            border: 1px solid lightgray;
             div{
                 display: flex;
                 flex-wrap: wrap;

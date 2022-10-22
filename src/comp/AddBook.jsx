@@ -1,7 +1,8 @@
-import BookForm from "./BookForm";
+import { useState } from "react";
 import { db } from "../fireBaseConfig";
 import { collection, addDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import NewAddBook from "./NewAddBook";
 
 // import ListOfBook from "./ListOfBook";
 
@@ -15,12 +16,23 @@ const AddBook = () => {
         await addDoc(booksCollectonRef, book);
         navigate("/");    
     }
-
-    
+    const [authors, setAuthor] = useState([1]);
+    const IncreasAuthor = (num) => {
+        if(authors.length < 5){
+          setAuthor((p) => [...p,num]);
+        }
+    }
+    const RemoveAuthor = (nums) => {
+      console.log(nums)
+        if(authors.length > 1){
+          const newArr = nums.pop();
+          setAuthor(newArr);
+        }
+    }
   return  (
-    <>
-        <BookForm onSubmitHandeler={onSubmitHandeler} />   
-    </>
+  <>
+    <NewAddBook onSubmitHandeler={onSubmitHandeler}  authors={authors} setAuthor={setAuthor} IncreasAuthor={IncreasAuthor} RemoveAuthor={RemoveAuthor} />
+  </>
   )
 }
 

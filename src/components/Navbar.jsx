@@ -31,7 +31,8 @@ const Container = styled.div`
     justify-content: space-around;
     padding: 1rem 3rem;
     height: 4rem;
-    background-color: #f5f0f8;
+    background-color: #d8deef;
+    /* background-color: #f5f0f8; */
     @media(max-width: 800px){
         padding: 1rem .3rem;
     }
