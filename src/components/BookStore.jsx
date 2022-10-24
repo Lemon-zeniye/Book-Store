@@ -5,9 +5,15 @@
   import '@splidejs/react-splide/css';
   import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';
   import BookTwo from "./BookTwo";
+  import img3 from "../images/cover3.jpg"
+  import img4 from "../images/cover4.jpg"
+  import img5 from "../images/cover5.jpg"
+  import img6 from "../images/cover6.jpg"
+  import img7 from "../images/cover7.jpg"
+  import img8 from "../images/cover8.png"
   const BookStore = ({search}) => {
       const [books, setBooks] = useContext(BooksContext);
-   const bookss = [1,2,3,4,5];
+   const bookss = [img3,img4,img5,img6,img7,img8];
       return(
         <Container>
           <InnerContainer>

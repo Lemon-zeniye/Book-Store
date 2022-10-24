@@ -1,30 +1,29 @@
-import styled, {css} from "styled-components";
-import { deleteDoc,  doc } from "firebase/firestore";
-import { db } from "../fireBaseConfig";
-import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+// import { deleteDoc,  doc } from "firebase/firestore";
+// import { db } from "../fireBaseConfig";
+// import { useNavigate } from "react-router-dom";
 import {NavLink} from "react-router-dom";
-import imgone from "../images/book.jpg";
 
 
 function BookTwo({book, books, setBooks}) {
-    const navigate = useNavigate();
-    const updateBook = async (book) => {
-       navigate(`/update/${book.id}`);
-    }
-    const deleteBook = async (id) => {
-        console.log(id);
-       try{
-         await deleteDoc(doc(db, "Books", id));
-        setBooks(books.filter((b) => b.id !== id));
-       }catch(err){
-          console.log(err)
-       }
-    }
+    // const navigate = useNavigate();
+    // const updateBook = async (book) => {
+    //    navigate(`/update/${book.id}`);
+    // }
+    // const deleteBook = async (id) => {
+    //     console.log(id);
+    //    try{
+    //      await deleteDoc(doc(db, "Books", id));
+    //     setBooks(books.filter((b) => b.id !== id));
+    //    }catch(err){
+    //       console.log(err)
+    //    }
+    // }
   return (
     <Container>
       <ImgCon>
         <HyperLink to={'/books/ + book.id' }>
-          <Img src={imgone} />
+          <Img src={book} />
         </HyperLink>
       </ImgCon>
       <DescriptionCon>
@@ -107,24 +106,24 @@ const ButtonCon = styled.div`
      /* display: none; */
 `
 
-const Button = styled.button`
-    padding: .2rem .8rem;
-    border-radius: .3rem;
-    color:white;
-    cursor: pointer;
-    border: 1px solid lightgray;
-    color: #585858;
-    &:hover{
-      background-color: #50dd50;
-      color: white;
-    }
-    ${props => props.delete && css`
-      &:hover{
-        background-color: #fd2424;
-        color: white;
-      }
-    `}
-`
+// const Button = styled.button`
+//     padding: .2rem .8rem;
+//     border-radius: .3rem;
+//     color:white;
+//     cursor: pointer;
+//     border: 1px solid lightgray;
+//     color: #585858;
+//     &:hover{
+//       background-color: #50dd50;
+//       color: white;
+//     }
+//     ${props => props.delete && css`
+//       &:hover{
+//         background-color: #fd2424;
+//         color: white;
+//       }
+//     `}
+// `
  
 
 export default BookTwo
