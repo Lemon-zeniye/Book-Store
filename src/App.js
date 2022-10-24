@@ -11,7 +11,6 @@ import Favorite from "./components/Favorite";
 import BookStore from "./components/BookStore";
 import BookOnCart from "./components/BookOnCart";
 import AddBook from "./comp/AddBook";
-import UpdateBook from "./comp/UpdateBook";
 
 const App = () => {
 const [search, setSearch] = useState("");
