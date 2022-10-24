@@ -3,13 +3,45 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "../fireBaseConfig";
 import {Container, BookContainer,InputContainer,TitleContainer, FieldContainer,AuthorsContainer, SingleAuthorCon,PublisherContainer, ImageContainer,ImageCon, Img, Button, ErrorMessage } from "./NewAddBookStyle";
 import { useForm } from "react-hook-form";
-
+import { useParams } from "react-router-dom";
+import { db } from "../fireBaseConfig";
+import { getDoc, doc } from "firebase/firestore";
 
 const  NewAddBook = ({authors, onSubmitHandeler ,RemoveAuthor, IncreasAuthor}) => {
         const [image, setImage] = useState(null);
         const [imgUrl, setImgUrl] = useState("");
         const [percent, setPercent] = useState(0);
+        const [book, setBook] = useState([]);
 
+        
+        // //to get a single book using its id
+        // const { id } = useParams()
+        // const docRef = doc(db, "Books", id);
+        // useEffect(() => {
+        //     if(id){
+        //         const getDataById = async () => {
+        //             try {
+        //                 const docSnap = await getDoc(docRef);
+        //                 if(docSnap.exists()){
+        //                     setBook(await docSnap.data());
+        //                     console.log('docSnap.data().title')
+        //                 }else{
+        //                     console.log("Document dose not eists");
+        //                 }
+
+        //             }catch(err){
+        //                 console.log(err);
+        //             }
+        //         }
+        //         getDataById();
+        //     }
+           
+        // },[]);
+        
+        // const fields = ['ISBN','title','category', 'condition', 'coverType','date', 'description', 'fName0', 'fName1', 'lName0', 'lName1', 'mName0', 'mName1', 'pCity', 'pName', 'pages', 'price', 'psubSity'];
+     
+
+        // to upload an image
         useEffect(() => {
             const uploadImage = () => {
                 const fileName = new Date().getTime() + image.name;
@@ -30,7 +62,7 @@ const  NewAddBook = ({authors, onSubmitHandeler ,RemoveAuthor, IncreasAuthor}) =
             }
             image && uploadImage();
         },[image]);
-        const { register, handleSubmit, formState: { errors } } = useForm();
+        const { register, handleSubmit, setValue, formState: { errors } } = useForm();
         const registerOptions = {
             title: { required: "Title is required",
                     maxLength: {
@@ -106,6 +138,10 @@ const  NewAddBook = ({authors, onSubmitHandeler ,RemoveAuthor, IncreasAuthor}) =
         const handleError = (errors) => {
             console.log(errors);
         }
+      
+        useEffect(() => {
+            console.log(book);
+        },[])
         
   return (
     <Container>
@@ -123,27 +159,27 @@ const  NewAddBook = ({authors, onSubmitHandeler ,RemoveAuthor, IncreasAuthor}) =
                     </label>
                 </TitleContainer>
                 <FieldContainer>
-                    <label className="custom-field" >
+                    <div className="custom-field" >
                         <input type="text" name="ISBN" {...register('ISBN', registerOptions.ISBN)} className="valid"  />
                         <span className="placeholder">ISBN<span className="requiredStar"> *</span></span>
                         <small className='errorMessage'>
                             {errors?.ISBN && errors.ISBN.message}
                         </small>
-                    </label>
-                    <label className="custom-field" >
+                    </div>
+                    <div className="custom-field" >
                         <input  type="number" name='price' {...register('price', registerOptions.price)} className="valid"  />
                         <span className="placeholder">Price <span className="requiredStar"> *</span> </span>
                         <small className='errorMessage'>
                             {errors?.price && errors.price.message}
                         </small>
-                    </label>
-                    <label className="custom-field" >
+                    </div>
+                    <div className="custom-field last-field" >
                         <input  type="number" name='pages' {...register('pages', registerOptions.pages)} className="valid" />
                         <span className="placeholder">Pages<span className="requiredStar"> *</span> </span>
                         <small className='errorMessage'>
                             {errors?.pages && errors.pages.message}
                         </small>
-                    </label>
+                    </div>
                 </FieldContainer>
                 <FieldContainer select>
                     <label className="custom-field" >
@@ -186,7 +222,7 @@ const  NewAddBook = ({authors, onSubmitHandeler ,RemoveAuthor, IncreasAuthor}) =
                             {errors?.condition && errors.condition.message}
                         </small>
                     </label>
-                    <label htmlFor="date" className="custom-field" >
+                    <label htmlFor="date" className="custom-field last-field" >
                         <input id="date"  name='date' {...register('date', registerOptions.date)} type="date"   className="date" />
                         <small className='errorMessage'>
                             {errors?.date && errors.date.message}
@@ -208,39 +244,39 @@ const  NewAddBook = ({authors, onSubmitHandeler ,RemoveAuthor, IncreasAuthor}) =
             <h2>Authours</h2>
             <InputContainer author>
             <ErrorMessage>
-                {errors?.fName0 && <small> {errors.fName0.message} </small>}
-                {errors?.fName1 && <small> {errors.fName1.message}</small>}
-                {errors?.fName2 && <small> {errors.fName2.message}</small>}
-                {errors?.fName3 && <small> {errors.fName3.message}</small>}
-                {errors?.fName4 && <small> {errors.fName4.message}</small>}
-                {errors?.mName0 && <small> {errors.mName0.message}</small>}
-                {errors?.mName1 && <small> {errors.mName1.message}</small>}
-                {errors?.mName2 && <small> {errors.mName2.message}</small>}
-                {errors?.mName3 && <small> {errors.mName3.message}</small>}
-                {errors?.mName4 && <small> {errors.mName4.message}</small>}
-                {errors?.lName0 && <small> {errors.lName0.message}</small>}
-                {errors?.lName1 && <small> {errors.lName1.message}</small>}
-                {errors?.lName2 && <small> {errors.lName2.message}</small>}
-                {errors?.lName3 && <small> {errors.lName3.message}</small>}
-                {errors?.lName4 && <small> {errors.lName4.message}</small>}
+                {errors?.fName0 && <small>Author 1 {errors.fName0.message} </small>}
+                {errors?.fName1 && <small>Author 2 {errors.fName1.message}</small>}
+                {errors?.fName2 && <small>Author 3 {errors.fName2.message}</small>}
+                {errors?.fName3 && <small>Author 4 {errors.fName3.message}</small>}
+                {errors?.fName4 && <small>Author 5 {errors.fName4.message}</small>}
+                {errors?.mName0 && <small>Author 1 {errors.mName0.message}</small>}
+                {errors?.mName1 && <small>Author 2 {errors.mName1.message}</small>}
+                {errors?.mName2 && <small>Author 3 {errors.mName2.message}</small>}
+                {errors?.mName3 && <small>Author 4 {errors.mName3.message}</small>}
+                {errors?.mName4 && <small>Author 5 {errors.mName4.message}</small>}
+                {errors?.lName0 && <small>Author 1 {errors.lName0.message}</small>}
+                {errors?.lName1 && <small>Author 2 {errors.lName1.message}</small>}
+                {errors?.lName2 && <small>Author 3 {errors.lName2.message}</small>}
+                {errors?.lName3 && <small>Author 4 {errors.lName3.message}</small>}
+                {errors?.lName4 && <small>Author 5 {errors.lName4.message}</small>}
             </ErrorMessage>
                 {
                     authors.map((author, index) => (
                         <SingleAuthorCon key={index}>
                             <h3>Author {index + 1} <i  className="fa-regular fa-circle-xmark" onClick={() => RemoveAuthor(authors)}></i> </h3>
                             <FieldContainer author >
-                                <label className="custom-field" >
+                                <div className="custom-field" >
                                     <input type="text" name={"fName"+ index } {...register(`${'fName' + index}`, registerOptions.fName)} className= "valid" />
                                     <span className="placeholder">First Name<span className="requiredStar"> *</span></span>
-                                </label>
-                                <label className="custom-field" >
+                                </div>
+                                <div className="custom-field" >
                                     <input  type="text" name={"mName"+ index } {...register(`${'mName' + index}`, registerOptions.mName)} className="valid"   />
                                     <span className="placeholder">Middle Name</span>
-                                </label>
-                                <label className="custom-field" >
+                                </div>
+                                <div className="custom-field" >
                                     <input  type="text" name={"lName"+ index } {...register(`${'lName' + index}`, registerOptions.lName)} className="valid"  />
                                     <span className="placeholder">Last Name </span>
-                                </label>
+                                </div>
                             </FieldContainer>
                         </SingleAuthorCon>
                     ))
@@ -252,27 +288,27 @@ const  NewAddBook = ({authors, onSubmitHandeler ,RemoveAuthor, IncreasAuthor}) =
            <h2>Publisher</h2> 
             <InputContainer>
                 <FieldContainer>
-                    <label className="custom-field" >
+                    <div className="custom-field" >
                         <input type="text" name="pName" className="valid" {...register('pName', registerOptions.pName)} />
                         <span className="placeholder">Name <span className="requiredStar"> *</span></span>
                         <small className='errorMessage'>
                             {errors?.pName && errors.pName.message}
                         </small>
-                    </label>
-                    <label className="custom-field" >
+                    </div>
+                    <div className="custom-field" >
                         <input  type="text" name='pCity'className='valid' {...register('pCity', registerOptions.pCity)}  />
                         <span className="placeholder">City</span>
                         <small className='errorMessage'>
                             {errors?.pCity && errors.pCity.message}
                         </small>
-                    </label>
-                    <label className="custom-field" >
+                    </div>
+                    <div className="custom-field" >
                         <input  type="text" name='psubSity' className='valid' {...register('psubSity', registerOptions.psubSity)} />
                         <span className="placeholder">Sub City</span>
                         <small className='errorMessage'>
                             {errors?.psubSity && errors.psubSity.message}
                         </small>
-                    </label>
+                    </div>
                 </FieldContainer>
             </InputContainer>
         </PublisherContainer>

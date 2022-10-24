@@ -4,10 +4,12 @@ import book from "../images/book.jpg";
 import book4 from '../images/book4.jpg';
 import BookStore from "./BookStore";
 import { Link } from "react-router-dom";
+import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';
 import { useState } from "react";
-
+import { Splide, SplideSlide } from "@splidejs/react-splide";
 const HomePage = () => {
     const [search, setSearch] = useState('');
+    const imgs = [book, book1, book4];
     return(
     <div>
         <Container>
@@ -25,10 +27,24 @@ const HomePage = () => {
                 </div>
             </InnerContainer>
         
-            <ImgContainer>
-               <img className="below" src={book}  alt=""/>
+            <ImgContainer id="reactive">
+                <Splide  options={{type: 'loop', pauseOnFocus: false, pauseOnHover: false,perPage:1,height: "25rem", width: "30rem",   focus:"center", pagination: false, arrows: false, 
+                    autoScroll: {
+                        speed: 1.3,
+                    }, }} extensions={{AutoScroll}} >
+                    {
+                        imgs.map(img => (
+                            <SplideSlide key={img} >
+                                <div>
+                                    <img className="below" src={img}  alt=""/>
+                                </div>
+                            </SplideSlide>
+                        ))
+                    }
+                </Splide>
+               {/* <img className="below" src={book}  alt=""/>
                <img className="top" src={book4}  alt=""/>
-               <img className="left" src={book1}  alt=""/>
+               <img className="left" src={book1}  alt=""/> */}
             </ImgContainer>
         </Container>
         <BookStore search={search} />
@@ -37,7 +53,7 @@ const HomePage = () => {
 }
 const Container = styled.div`
     display: flex;
-    height: 75vh;
+    min-height: 75vh;
     background-color: #f5f0f8;
     padding: 1rem;
 
@@ -46,6 +62,9 @@ const InnerContainer = styled.div`
     flex: 1;
     margin: 5rem;
     border-right: 1px solid #e3d6e1;
+    /* box-shadow: 0 6px 6px -6px #6e83d1;
+     */
+     box-shadow: 6px 0 5px -6px #aaa;
     @media(max-width: 800px){
         border: none;
         margin: 1rem;
@@ -96,26 +115,27 @@ const InnerContainer = styled.div`
 `
 const ImgContainer = styled.div`
     flex: 1;
-    display: flex;
+    margin: auto auto;
+    /* display: flex;
     margin-left: 1rem;
     align-items: center;
     justify-content: center;
-    position: relative;
+    flex-direction: column; */
     @media(max-width: 800px){
         display: none;
     }
-
     img{
-        width: 15rem;
-        height: 20rem;
+        width: 18rem;
+        height: 25rem;
         object-fit: fill;
         position: absolute;
         border: 1px solid black;
+        margin: 0 auto;
     }
-    .below{
+    /* .below{
         z-index: 10;
         right: 20%;
-        bottom: 5%;
+        top: 15%;
     }
     .top{
         top: 0;
@@ -125,7 +145,7 @@ const ImgContainer = styled.div`
         left: 20%;
         top: 5%;
         z-index: 11;
-    }
+    } */
     
     
 `

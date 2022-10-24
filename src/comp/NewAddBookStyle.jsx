@@ -1,6 +1,7 @@
 import styled, {css} from "styled-components";
 export const Container = styled.div`
-    
+    max-width: 1550px;
+    min-width: 400px;
 `
 export const BookContainer = styled.div`
     margin: 1rem 4rem;
@@ -43,7 +44,6 @@ position: relative;
 padding-top: 20px;
 margin-bottom: 5px;
 .custom-field{
-        /* position: relative; */
         font-size: 14px;
         input[type=number]::-webkit-inner-spin-button, 
         input[type=number]::-webkit-outer-spin-button { 
@@ -56,10 +56,8 @@ margin-bottom: 5px;
         }
         input {
             border: none;
-            padding: 12px;
+            padding: 10px;
             font-size: 17px;
-            padding-bottom: 10px;
-            padding-left: 10px;
             outline: none;
             font-family: 'Noto Sans', sans-serif;
             box-sizing: border-box;
@@ -101,11 +99,6 @@ margin-bottom: 5px;
             color: #8b9fe8; 
             text-shadow: 1px 1px 3px #90a5f4; 
         }
-    span.placeholder{
-        font-size: 17px;
-        font-family: 'Noto Sans', sans-serif;
-        padding-left: .5rem;
-    }
     textarea:focus + span.placeholder{
         color: #8b9fe8; 
         text-shadow: 1px 1px 3px #90a5f4; 
@@ -145,55 +138,56 @@ ${props => props.desc && css`
 `
 export const FieldContainer = styled.div`
 margin: 1rem 0;
+max-width: 1500px;
+min-width: 200px;
 display: flex;
-justify-content: space-between;
 flex-wrap: wrap;
+justify-content: space-between;
 @media(max-width: 800px){
-    align-items: center;
-    /* justify-content: center; */
+    display: block;
 }
+
 .custom-field{
         position: relative;
         font-size: 14px;
-        padding-top: 20px;
         margin-bottom: 12px;
-        input[type=number]::-webkit-inner-spin-button, 
-        input[type=number]::-webkit-outer-spin-button { 
-        -webkit-appearance: none;
-        }
+        padding-top: 20px;
+        flex: 1;
+        margin-right: 1rem;
+
         @media(max-width: 800px){
-            margin: 0 .5rem;
+            padding-top: 20px;
+            margin: 1rem 0;
         }
         small.errorMessage{
             display: block;
             color: red;
-            padding-top: .3rem;
         }
         input {
             border: none;
-            padding: 12px;
+            padding: 10px;
             font-size: 17px;
-            padding-bottom: 10px;
-            padding-left: 10px;
             outline: none;
-            width: 390px;
+            width: 100%;
             font-family: 'Noto Sans', sans-serif;
             box-sizing: border-box;
             box-shadow: 0px 0px 8px 2px #dfe4f2;
             border-radius: .2rem;
             letter-spacing: 1px;
-            @media(max-width: 800px){
-                width: 100%;
-            }
+            
             &:focus{
                 border-bottom: 1px solid #8b9fe8;
                 box-shadow: 0 6px 6px -6px #6e83d1;
                 transition: box-shadow .5s linear,  border-bottom .5s linear;
             }
         }
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+        -webkit-appearance: none;
+        }
         input[type="date"]{
             padding: 12px;
-            width: 270px;
+            width: 100%;
             box-shadow: 0px 0px 8px 2px #dfe4f2;
             border-radius: .2rem;
             font-family: 'Noto Sans', sans-serif;
@@ -217,6 +211,10 @@ flex-wrap: wrap;
             letter-spacing: 1px;
             -webkit-transition: top .3s ease-in-out,  font-size .3s ease-in-out ;
             transition: top .3s ease-in-out,  font-size .3s ease-in-out;
+            display: flex;
+            @media(max-width: 800px){
+                top: 0;
+            }
             span.requiredStar{
                 color: red;
             }
@@ -237,22 +235,23 @@ flex-wrap: wrap;
             outline: none;
             font-family: 'Noto Sans', sans-serif;
             padding: 12px;
-            width: 270px;
+            width: 100%;
             box-shadow: 0 6px 6px -6px #849cf2;
             box-shadow: 0px 0px 8px 2px #dfe4f2;
             border-radius: .2rem;
             cursor: pointer;
+            
             @media(max-width: 800px){
-                width: 250px;
-            }
-            @media(max-width: 500px){
-                width: 100%;
+                margin: .5rem 0;
             }
             &:focus{
                 box-shadow: 0px 0px 8px 2px #91a6e0;
             }
         }
         
+}
+.last-field{
+    margin-right: 0;
 }
 ${props => props.select && css`
             .custom-field{

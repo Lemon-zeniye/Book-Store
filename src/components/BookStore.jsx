@@ -7,22 +7,23 @@
   import BookTwo from "./BookTwo";
   const BookStore = ({search}) => {
       const [books, setBooks] = useContext(BooksContext);
+   const bookss = [1,2,3,4,5];
       return(
         <Container>
           <InnerContainer>
               <h2>BestSeller Books</h2>
-              <Splide options={{type: 'loop',arrows:false, autoWidth:true,  pagination: false, drag: 'free', gap: '1rem', focus:"center",
-                   autoScroll: {
+                  <Splide options={{type: 'loop',arrows:false, autoWidth:true,  pagination: false, drag: 'free', gap: '1rem', focus:"center",
+                    autoScroll: {
                         speed: .3,
-                    }, }} extensions={{AutoScroll}}>
-                 {
-                  books.map(best => (
-                    <SplideSlide key={best.id}>
-                      <BookTwo book={best} books={books} setBooks={setBooks}/>
-                    </SplideSlide>
-                  ))
+                    }, }} extensions={{AutoScroll}}> 
+                  {
+                      bookss.map(best => (
+                      <SplideSlide key={best} >
+                          <BookTwo book={best} books={books} setBooks={setBooks}/>
+                      </SplideSlide>
+                      ))
                   }
-              </Splide>
+                </Splide>
           </InnerContainer>
         </Container>
       )};
@@ -39,3 +40,10 @@
       }
   `
   export default BookStore;
+
+  //  <Splide options={{type: 'loop',arrows:false, autoWidth:true,  pagination: false, drag: 'free', gap: '1rem', focus:"center",
+  //           autoScroll: {
+  //               speed: .3,
+  //           }, }} extensions={{AutoScroll}}> 
+  // </Splide>
+  

@@ -3,6 +3,7 @@ import { deleteDoc,  doc } from "firebase/firestore";
 import { db } from "../fireBaseConfig";
 import { useNavigate } from "react-router-dom";
 import {NavLink} from "react-router-dom";
+import imgone from "../images/book.jpg";
 
 
 function BookTwo({book, books, setBooks}) {
@@ -22,19 +23,19 @@ function BookTwo({book, books, setBooks}) {
   return (
     <Container>
       <ImgCon>
-      <HyperLink to={'/books/' + book.id}>
-        <Img src={book.image} />
-      </HyperLink>
+        <HyperLink to={'/books/ + book.id' }>
+          <Img src={imgone} />
+        </HyperLink>
       </ImgCon>
       <DescriptionCon>
-         <HyperLink to={'/books/' + book.id}> <p className="title">The Merry Adventures of Robinhood</p></HyperLink>
+         <HyperLink to={'/books/ + book.id ' }> <p className="title">The Merry Adventures of Robinhood</p></HyperLink>
           <small>by: James Corden</small>
           <p>4.5 <i className="fa-solid fa-star"></i></p>
           <p className="price">255$</p>
       </DescriptionCon>
       <ButtonCon>
-          <Button onClick={() => updateBook(book)} >Edit</Button>
-          <Button delete onClick={() => deleteBook(book.id)} >Delete</Button>
+          {/* <Button onClick={() => updateBook(book)} >Edit</Button>
+          <Button delete onClick={() => deleteBook(book.id)} >Delete</Button> */}
       </ButtonCon>
     </Container>
   )
@@ -43,10 +44,10 @@ const Container = styled.div`
     border: .5px solid lightgray;
     width: 13rem;
     min-height: 23rem;
-    border: 1px solid #d0d0d0;
+    margin-top: 1rem;
+    box-shadow: 0px 0px 8px 2px #cfd8f4;
+    border: none;
     border-radius: .3rem;
-    /* box-shadow: 1px 1px 2px 2px #e7e7e7 ; */
-    margin: 1rem 0;
     @media(max-width: 800px){
       width: 100%;
       margin: 1rem auto;
@@ -56,14 +57,15 @@ const HyperLink = styled(NavLink)`
     text-decoration: none; 
 `
 const ImgCon = styled.div`
-    width: 8rem;
-    height: 12rem;
+    width: 9rem;
+    height: 13rem;
     margin: 0 auto;
-    padding-top: 1rem;
+    padding-top: .5rem;
     transition: all .2s linear;
+    border-radius: .3rem;
     cursor: pointer;
     &:hover{
-      width: 9rem;
+      width: 10rem;
       height: 14rem;
     }
 `
@@ -71,6 +73,8 @@ const Img = styled.img`
     width: 100%;
     height: 100%;
     object-fit: fill;
+    box-shadow: 0px 0px 8px 2px #dfe4f2;
+    padding: .3rem;
     
 `
 const DescriptionCon = styled.div`

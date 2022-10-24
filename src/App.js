@@ -29,7 +29,7 @@ const [search, setSearch] = useState("");
             <Route exact path="bookStore" element={<BookStore search={search} />} />
             <Route exact path="cart" element={<BookOnCart  />} />
             <Route exact path="addBook" element={<AddBook />} />
-            <Route exact path="update/:id" element={<UpdateBook />} />
+            <Route exact path="update/:id" element={<AddBook />} />
         </Routes>
       </BrowserRouter>
     </BooksProvider>

@@ -12,8 +12,8 @@ useEffect(() => {
         const data = await getDocs(booksCollectonRef);
         setBooks(data.docs.map(doc => ({...doc.data(), id: doc.id})));
     }
-    getBooks();
-},[booksCollectonRef]);
+    getBooks()
+},[]);
 
     return(
         <BooksContext.Provider value = {[books, setBooks]}>
