@@ -3,15 +3,14 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "../fireBaseConfig";
 import {Container, BookContainer,InputContainer,TitleContainer, FieldContainer,AuthorsContainer, SingleAuthorCon,PublisherContainer, ImageContainer,ImageCon, Img, Button, ErrorMessage } from "./NewAddBookStyle";
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
-import { db } from "../fireBaseConfig";
-import { getDoc, doc } from "firebase/firestore";
+// import { useParams } from "react-router-dom";
+// import { db } from "../fireBaseConfig";
+// import { getDoc, doc } from "firebase/firestore";
 
 const  NewAddBook = ({authors, onSubmitHandeler ,RemoveAuthor, IncreasAuthor}) => {
         const [image, setImage] = useState(null);
         const [imgUrl, setImgUrl] = useState("");
         const [percent, setPercent] = useState(0);
-        const [book, setBook] = useState([]);
 
         
         // //to get a single book using its id
@@ -62,7 +61,7 @@ const  NewAddBook = ({authors, onSubmitHandeler ,RemoveAuthor, IncreasAuthor}) =
             }
             image && uploadImage();
         },[image]);
-        const { register, handleSubmit, setValue, formState: { errors } } = useForm();
+        const { register, handleSubmit,  formState: { errors } } = useForm();
         const registerOptions = {
             title: { required: "Title is required",
                     maxLength: {
@@ -139,9 +138,6 @@ const  NewAddBook = ({authors, onSubmitHandeler ,RemoveAuthor, IncreasAuthor}) =
             console.log(errors);
         }
       
-        useEffect(() => {
-            console.log(book);
-        },[])
         
   return (
     <Container>
