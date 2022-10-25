@@ -19,23 +19,29 @@ const [search, setSearch] = useState("");
     <BooksProvider>
       <BrowserRouter>
         <Navbar setSearch={setSearch} />
-        <Routes>
-            <Route exact path="/" element={<HomePage />} />
-            <Route path="login" element={<Login /> }/>
-            <Route exact path="register" element={<Register />} /> 
-            <Route exact path="books/:BookId" element={<BookDetail />} />
-            <Route exact path="favorite" element={<Favorite />} />
-            <Route exact path="bookStore" element={<BookStore search={search} />} />
-            <Route exact path="cart" element={<BookOnCart  />} />
-            <Route exact path="addBook" element={<AddBook />} />
-            <Route exact path="update/:id" element={<AddBook />} />
-        </Routes>
+        <BigContainer>
+          <Routes>
+              <Route exact path="/" element={<HomePage />} />
+              <Route path="login" element={<Login /> }/>
+              <Route exact path="register" element={<Register />} /> 
+              <Route exact path="books/:BookId" element={<BookDetail />} />
+              <Route exact path="favorite" element={<Favorite />} />
+              <Route exact path="bookStore" element={<BookStore search={search} />} />
+              <Route exact path="cart" element={<BookOnCart  />} />
+              <Route exact path="addBook" element={<AddBook />} />
+              <Route exact path="update/:id" element={<AddBook />} />
+          </Routes>
+        </BigContainer>
       </BrowserRouter>
     </BooksProvider>
 </Main>
   )
 }
 const Main = styled.div`
+  width:100%;
+`
+const BigContainer = styled.div`
+  width:100%;
 `
 export default App;
 

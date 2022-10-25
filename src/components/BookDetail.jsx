@@ -1,12 +1,13 @@
 import styled from "styled-components";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { db } from "../fireBaseConfig";
 import { getDoc, doc } from "firebase/firestore";
+import img from "../images/cover26.jpg";
 
 const BookDetail = () => {
     const {BookId} = useParams();
-    const [book, setBook] = useState([]);
+    // const [book, setBook] = useState([]);
 
     // const [books, setBooks] = useContext(BooksContext);
     // const updateFavorite = books.map(b => books[BookId].id === b.id  ? {...b, favorite: !b.favorite}: b);
@@ -16,7 +17,7 @@ const BookDetail = () => {
             try {
                 const docSnap = await getDoc(docRef);
                 if(docSnap.exists()){
-                    setBook(await docSnap.data());
+                    // setBook(await docSnap.data());
                 }else{
                     console.log("Document dose not eists");
                 }
@@ -30,7 +31,7 @@ const BookDetail = () => {
     return(
         <Container>
             <ImageContainer>
-                <img src={book.image} alt=" " />
+                <img src={img} alt=" " />
             </ImageContainer>
             <Decription>
                 <h2>Big Magic: Creative Living Beyond Fear</h2>
@@ -58,6 +59,9 @@ const BookDetail = () => {
     )
 }
 const Container = styled.div`
+    max-width: 1600px;
+    min-width: 300px;
+    margin: 0 auto;
     background-color: #f5f3f3;
     height: calc(100vh - 4rem);
     padding: 1rem 7rem;
@@ -78,9 +82,11 @@ const Container = styled.div`
 `
 const ImageContainer = styled.div`
     flex: 1;
+    text-align: center;
     img{
-        width: 20rem;
-        height: 70vh;
+        width: 90%;
+        /* height: 70vh; */
+        margin: 0 auto;
         object-fit: fill;
         @media(max-width: 800px){
             height: 60vh;

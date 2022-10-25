@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "../fireBaseConfig";
-import {Container, BookContainer,InputContainer,TitleContainer, FieldContainer,AuthorsContainer, SingleAuthorCon,PublisherContainer, ImageContainer,ImageCon, Img, Button, ErrorMessage } from "./NewAddBookStyle";
+import {Container, BookContainer,InputContainer,TitleContainer, FieldContainer,AuthorsContainer, SingleAuthorCon,PublisherContainer, ImageContainer,ImageCon, Img, Button,ButtonCon, ErrorMessage } from "./NewAddBookStyle";
 import { useForm } from "react-hook-form";
 // import { useParams } from "react-router-dom";
 // import { db } from "../fireBaseConfig";
@@ -11,34 +11,18 @@ const  NewAddBook = ({authors, onSubmitHandeler ,RemoveAuthor, IncreasAuthor}) =
         const [image, setImage] = useState(null);
         const [imgUrl, setImgUrl] = useState("");
         const [percent, setPercent] = useState(0);
+        const { register, handleSubmit,   formState: { errors } } = useForm();
 
+    //     const fields = ['ISBN','title','category', 'condition', 'coverType','date', 'description', 'fName0', 'lName0',  'mName0',  'pCity', 'pName', 'pages', 'price', 'psubSity'];
+    //    const book =  {ISBN: bookk.ISBN,title: bookk.title,category: bookk.category, condition: bookk.condition, coverType: bookk.coverType,date: bookk.date, description: bookk.description, fName0: bookk.fName0, lName0: bookk.lName0,  mName0: bookk.mName0,  pCity: bookk.pCity, pName: bookk.pName, pages: bookk.pages, price: bookk.price, psubSity:bookk.psubSity};
+         
         
-        // //to get a single book using its id
-        // const { id } = useParams()
-        // const docRef = doc(db, "Books", id);
         // useEffect(() => {
-        //     if(id){
-        //         const getDataById = async () => {
-        //             try {
-        //                 const docSnap = await getDoc(docRef);
-        //                 if(docSnap.exists()){
-        //                     setBook(await docSnap.data());
-        //                     console.log('docSnap.data().title')
-        //                 }else{
-        //                     console.log("Document dose not eists");
-        //                 }
-
-        //             }catch(err){
-        //                 console.log(err);
-        //             }
-        //         }
-        //         getDataById();
+        //     if(bookk) {
+        //         fields.forEach(field => 
+        //         setValue(field, book.field));
         //     }
-           
-        // },[]);
-        
-        // const fields = ['ISBN','title','category', 'condition', 'coverType','date', 'description', 'fName0', 'fName1', 'lName0', 'lName1', 'mName0', 'mName1', 'pCity', 'pName', 'pages', 'price', 'psubSity'];
-     
+        // }, []);
 
         // to upload an image
         useEffect(() => {
@@ -61,7 +45,6 @@ const  NewAddBook = ({authors, onSubmitHandeler ,RemoveAuthor, IncreasAuthor}) =
             }
             image && uploadImage();
         },[image]);
-        const { register, handleSubmit,  formState: { errors } } = useForm();
         const registerOptions = {
             title: { required: "Title is required",
                     maxLength: {
@@ -235,9 +218,8 @@ const  NewAddBook = ({authors, onSubmitHandeler ,RemoveAuthor, IncreasAuthor}) =
                     </label>
                 </TitleContainer> 
             </InputContainer>
-        </BookContainer>
-        <AuthorsContainer>
-            <h2>Authours</h2>
+            <AuthorsContainer>
+            <h3>Authours</h3>
             <InputContainer author>
             <ErrorMessage>
                 {errors?.fName0 && <small>Author 1 {errors.fName0.message} </small>}
@@ -259,7 +241,7 @@ const  NewAddBook = ({authors, onSubmitHandeler ,RemoveAuthor, IncreasAuthor}) =
                 {
                     authors.map((author, index) => (
                         <SingleAuthorCon key={index}>
-                            <h3>Author {index + 1} <i  className="fa-regular fa-circle-xmark" onClick={() => RemoveAuthor(authors)}></i> </h3>
+                            <h4>Author {index + 1} <i  className="fa-regular fa-circle-xmark" onClick={() => RemoveAuthor(authors)}></i> </h4>
                             <FieldContainer author >
                                 <div className="custom-field" >
                                     <input type="text" name={"fName"+ index } {...register(`${'fName' + index}`, registerOptions.fName)} className= "valid" />
@@ -281,8 +263,8 @@ const  NewAddBook = ({authors, onSubmitHandeler ,RemoveAuthor, IncreasAuthor}) =
             </InputContainer>
         </AuthorsContainer>
         <PublisherContainer>
-           <h2>Publisher</h2> 
-            <InputContainer>
+           <h3>Publisher</h3> 
+            <InputContainer publisher>
                 <FieldContainer>
                     <div className="custom-field" >
                         <input type="text" name="pName" className="valid" {...register('pName', registerOptions.pName)} />
@@ -309,7 +291,7 @@ const  NewAddBook = ({authors, onSubmitHandeler ,RemoveAuthor, IncreasAuthor}) =
             </InputContainer>
         </PublisherContainer>
         <ImageContainer>
-        <h2>Book Cover</h2>
+        <h3>Book Cover</h3>
             <ImageCon>
              <label className='label' htmlFor="image"><p>Upload Cover Page<span className="requiredFiled"> *</span></p>
                  <i className="fa-solid fa-image"></i>
@@ -322,7 +304,10 @@ const  NewAddBook = ({authors, onSubmitHandeler ,RemoveAuthor, IncreasAuthor}) =
              <Img src={imgUrl}  alt="cover page Image"/>
          </ImageCon>
         </ImageContainer>
-        <Button>Submit</Button>
+        <ButtonCon>
+            <Button>Submit</Button>
+        </ButtonCon>
+    </BookContainer>
     </form>
     </Container>
   )

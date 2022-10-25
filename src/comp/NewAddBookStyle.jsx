@@ -1,10 +1,13 @@
 import styled, {css} from "styled-components";
 export const Container = styled.div`
-    max-width: 1550px;
+    max-width: 1600px;
     min-width: 400px;
+    margin: 0 auto;
 `
 export const BookContainer = styled.div`
-    margin: 1rem 4rem;
+    margin: 1rem 3rem;
+    box-shadow: 0px 0px 8px 2px #cfd8f4;
+    border-radius: .4rem;
     h2{
         font-family: 'Prompt', sans-serif;
         padding: 1rem;
@@ -16,10 +19,13 @@ export const BookContainer = styled.div`
 `
 export const InputContainer = styled.div`
     padding: .2rem 1rem;
-    box-shadow: 0px 0px 8px 2px #cfd8f4;
-    border-radius: 1rem;
+    border-radius: .5rem;
+    /* border: 1px solid #cfd8f4; */
+    /* margin: 1rem; */
+    /* box-shadow: 0px 0px 8px 2px #cfd8f4; */
     position: relative;
     ${props => props.author && css`
+             padding-bottom: 2rem;
              i.fa-circle-plus{
                 position: absolute; 
                 bottom: .3rem;
@@ -35,6 +41,14 @@ export const InputContainer = styled.div`
                 }
         }
     `}  
+    ${props => props.publisher && css`
+        box-shadow: 0px 0px 8px 2px #dfe4f2;
+        &:focus, &:hover{
+            background-color:  #eef3ff;
+            box-shadow: none;
+        }
+    `}  
+    
 `
 export const TitleContainer = styled.div`
 max-width: 1500px;
@@ -109,7 +123,7 @@ margin-bottom: 5px;
         margin-top: .7rem;
         padding: .3rem;
         height: 5rem;
-        box-shadow: 0px 0px 8px 2px #c7cfe3;
+        box-shadow: 0px 0px 8px 2px #dfe4f2;
         outline: none;
         font-size: 17px;
         font-family: 'Noto Sans', sans-serif;
@@ -194,6 +208,7 @@ justify-content: space-between;
             cursor: pointer;
             @media(max-width: 800px){
                 width: 100%;
+                margin: .5rem 0;
             }
             &:focus{
                 box-shadow: 0px 0px 8px 2px #91a6e0;
@@ -262,6 +277,8 @@ ${props => props.author && css`
     margin-top: 0;
     padding: .3rem;
     .custom-field{
+    margin-bottom: 0;
+    padding-bottom: .5rem;
         input{
             border: none;
             /* border-bottom: 1px solid #a9b6da; */
@@ -270,10 +287,13 @@ ${props => props.author && css`
 `}
 `
 export const AuthorsContainer = styled.div`
-    margin: 1rem 4rem;
-    h2{
+    /* margin: 1rem 4rem; */
+    box-shadow: 0px 0px 8px 2px #dfe4f2;
+    border-radius: .3rem;
+    margin:1rem;
+    h3{
         font-family: 'Prompt', sans-serif;
-        padding: 1rem;
+        padding: .5rem;
         padding-bottom: .5rem;
     }
     @media(max-width: 800px){
@@ -281,14 +301,22 @@ export const AuthorsContainer = styled.div`
     }
 `
 export const SingleAuthorCon = styled.div`
-    box-shadow: 0px 0px 8px 2px #cfd8f4;
-    margin: 1rem 0;
-    margin-bottom: 3rem;
+    /* box-shadow: 0px 0px 8px 2px #cfd8f4; */
+    /* border: 1px solid #cfd8f4; */
+    box-shadow: 0px 0px 8px 2px #dfe4f2;
+    /* margin: 1rem 0; */
+    margin-bottom: 1rem;
     border-radius: .3rem;
-    h3{
+    &:focus,&:hover {
+        /* box-shadow: 0px 0px 8px 2px #91a6e0; */
+        background-color:  #eef3ff;
+        box-shadow: none;
+    }
+    h4{
         display: flex;
         justify-content: space-between;
         padding: .5rem;
+        color: #3a4a77;
     }
     i.fa-circle-xmark{
         font-size: 17px;
@@ -303,8 +331,11 @@ export const SingleAuthorCon = styled.div`
     }
 `
 export const PublisherContainer = styled.div`
-    margin: 1rem 4rem;
-    h2{
+    /* margin: 1rem 4rem; */
+    /* box-shadow: 0px 0px 8px 2px #dfe4f2; */
+    border-radius: .3rem;
+    margin:1rem;
+    h3{
         font-family: 'Prompt', sans-serif;
         padding: 1rem;
         padding-bottom: .5rem;
@@ -314,8 +345,11 @@ export const PublisherContainer = styled.div`
     }
 `
 export const ImageContainer = styled.div`
-    margin: 1rem 4rem;
-    h2{
+    margin: 1rem;
+    /* box-shadow: 0px 0px 8px 2px #dfe4f2; */
+    border-radius: .3rem;
+    margin:1rem;
+    h3{
         font-family: 'Prompt', sans-serif;
         padding: 1rem;
         padding-bottom: .5rem;
@@ -326,15 +360,19 @@ export const ImageContainer = styled.div`
 `
 export const ImageCon = styled.div`
         padding: .2rem 1rem;
-        box-shadow: 0px 0px 8px 2px #cfd8f4;
-        border-radius: 1rem;
-        border-radius: .5rem;
+        /* box-shadow: 0px 0px 8px 2px #cfd8f4; */
+        box-shadow: 0px 0px 8px 2px #dfe4f2;
+        border-radius: .3rem;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-around;
         align-items: center;
         padding:1rem 4rem;
         min-height: 10vh;
+        &:focus, &:hover{
+            background-color:  #eef3ff;
+            box-shadow: none;
+        }
         .label{
             font-size: .9rem;
             font-weight: bold;
@@ -367,7 +405,12 @@ export const Img = styled.img`
         padding:.5rem;
         object-fit: fill;
         box-shadow: 0px 0px 8px 2px #cfd8f4;
+        background-color: white;
     `
+export const ButtonCon = styled.div`
+    min-height: 5rem;
+    max-height: 12rem;
+`
 export const Button = styled.button`
     border:none;
     outline: none;
@@ -375,9 +418,8 @@ export const Button = styled.button`
     border-radius: .2rem;
     margin: 1rem 4rem 2rem 0;
     cursor: pointer;
-    background-color: #70c7e4;    
     float: right;
-    border: none;
+    background-color: #70c7e4;    
     &:hover{
         color: white;
         background-color:#4b93ab;
@@ -394,6 +436,7 @@ export const Button = styled.button`
     
 `
 export const ErrorMessage = styled.div`
+    padding: .5rem;
     small{
         color: red;
         display: block;

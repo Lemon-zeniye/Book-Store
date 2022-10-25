@@ -2,6 +2,8 @@ import styled from "styled-components";
 import book1 from "../images/book1.avif";
 import book from "../images/book.jpg";
 import book4 from '../images/book4.jpg';
+import book2 from "../images/cover3.jpg";
+import book3 from "../images/cover7.jpg";
 import BookStore from "./BookStore";
 import { Link } from "react-router-dom";
 import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';
@@ -9,9 +11,9 @@ import { useState } from "react";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 const HomePage = () => {
     const [search, setSearch] = useState('');
-    const imgs = [book, book1, book4];
+    const imgs = [book, book1, book4,book2,book3];
     return(
-    <div>
+    <BigCon>
         <Container>
             <InnerContainer>
                 <h1>Buy and Sell your textbook for best price</h1>
@@ -28,7 +30,7 @@ const HomePage = () => {
             </InnerContainer>
         
             <ImgContainer id="reactive">
-                <Splide  options={{type: 'loop', pauseOnFocus: false, pauseOnHover: false,perPage:1,height: "25rem", width: "30rem",   focus:"center", pagination: false, arrows: false, 
+                <Splide  options={{type: 'loop', pauseOnFocus: false, pauseOnHover: false,perPage:1, height: "25rem", width: "30rem",   focus:"center", pagination: false, arrows: false, 
                     autoScroll: {
                         speed: 1.3,
                     }, }} extensions={{AutoScroll}} >
@@ -48,9 +50,16 @@ const HomePage = () => {
             </ImgContainer>
         </Container>
         <BookStore search={search} />
-    </div>
+    </BigCon>
     )
 }
+const BigCon = styled.div`
+    max-width: 1600px;
+    min-width: 400px;
+    margin: 0 auto;
+    box-shadow: 0px 0px 8px 2px #cfd8f4;
+    border-radius: .4rem;
+`
 const Container = styled.div`
     display: flex;
     min-height: 75vh;
@@ -125,12 +134,14 @@ const ImgContainer = styled.div`
         display: none;
     }
     img{
-        width: 18rem;
-        height: 25rem;
+        width: 20rem;
+        height: 27rem;
         object-fit: fill;
         position: absolute;
-        border: 1px solid black;
+        /* border: 1px solid black; */
         margin: 0 auto;
+        box-shadow: 0px 0px 8px 2px #cfd8f4;
+        padding: .5rem
     }
     /* .below{
         z-index: 10;

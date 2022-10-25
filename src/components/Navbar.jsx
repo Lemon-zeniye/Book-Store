@@ -31,10 +31,13 @@ const Container = styled.div`
     justify-content: space-around;
     padding: 1rem 3rem;
     height: 4rem;
+    min-width: 100%;
     background-color: #d8deef;
     /* background-color: #f5f0f8; */
     @media(max-width: 800px){
         padding: 1rem .3rem;
+       align-items: center;
+
     }
     ul{
         display: flex;
@@ -42,12 +45,15 @@ const Container = styled.div`
         width: 100%;
         margin: 0 .3rem;
         max-width: 40rem;
-        background-color: tomato;
+        @media(max-width: 600px){
+                display: none;
+            }
         input{
             width: 100%;
             border: none;
             outline: none;
             padding:.5rem;
+            
         }
         /* li{
             margin: 0 1rem;

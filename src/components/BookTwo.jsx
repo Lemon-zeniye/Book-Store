@@ -1,40 +1,40 @@
-import styled from "styled-components";
-// import { deleteDoc,  doc } from "firebase/firestore";
-// import { db } from "../fireBaseConfig";
-// import { useNavigate } from "react-router-dom";
+import styled, {css} from "styled-components";
+import { deleteDoc,  doc } from "firebase/firestore";
+import { db } from "../fireBaseConfig";
+import { useNavigate } from "react-router-dom";
 import {NavLink} from "react-router-dom";
 
 
 function BookTwo({book, books, setBooks}) {
-    // const navigate = useNavigate();
-    // const updateBook = async (book) => {
-    //    navigate(`/update/${book.id}`);
-    // }
-    // const deleteBook = async (id) => {
-    //     console.log(id);
-    //    try{
-    //      await deleteDoc(doc(db, "Books", id));
-    //     setBooks(books.filter((b) => b.id !== id));
-    //    }catch(err){
-    //       console.log(err)
-    //    }
-    // }
+    const navigate = useNavigate();
+    const updateBook = async (book) => {
+       navigate(`/update/${book.id}`);
+    }
+    const deleteBook = async (id) => {
+        console.log(id);
+       try{
+         await deleteDoc(doc(db, "Books", id));
+        setBooks(books.filter((b) => b.id !== id));
+       }catch(err){
+          console.log(err)
+       }
+    }
   return (
     <Container>
       <ImgCon>
-        <HyperLink to={'/books/ + book.id' }>
+        <HyperLink to={'/books/ + book.id  ' }>
           <Img src={book} />
         </HyperLink>
       </ImgCon>
       <DescriptionCon>
-         <HyperLink to={'/books/ + book.id ' }> <p className="title">The Merry Adventures of Robinhood</p></HyperLink>
+         <HyperLink to={'/books/ + book.id'  }> <p className="title">The Merry Adventures of Robinhood</p></HyperLink>
           <small>by: James Corden</small>
           <p>4.5 <i className="fa-solid fa-star"></i></p>
           <p className="price">255$</p>
       </DescriptionCon>
       <ButtonCon>
-          {/* <Button onClick={() => updateBook(book)} >Edit</Button>
-          <Button delete onClick={() => deleteBook(book.id)} >Delete</Button> */}
+          <Button onClick={() => updateBook(book)} >Edit</Button>
+          <Button delete onClick={() => deleteBook(book.id)} >Delete</Button>
       </ButtonCon>
     </Container>
   )
@@ -106,24 +106,24 @@ const ButtonCon = styled.div`
      /* display: none; */
 `
 
-// const Button = styled.button`
-//     padding: .2rem .8rem;
-//     border-radius: .3rem;
-//     color:white;
-//     cursor: pointer;
-//     border: 1px solid lightgray;
-//     color: #585858;
-//     &:hover{
-//       background-color: #50dd50;
-//       color: white;
-//     }
-//     ${props => props.delete && css`
-//       &:hover{
-//         background-color: #fd2424;
-//         color: white;
-//       }
-//     `}
-// `
+const Button = styled.button`
+    padding: .2rem .8rem;
+    border-radius: .3rem;
+    color:white;
+    cursor: pointer;
+    border: 1px solid lightgray;
+    color: #585858;
+    &:hover{
+      background-color: #50dd50;
+      color: white;
+    }
+    ${props => props.delete && css`
+      &:hover{
+        background-color: #fd2424;
+        color: white;
+      }
+    `}
+`
  
 
 export default BookTwo
