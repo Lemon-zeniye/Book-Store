@@ -11,10 +11,9 @@ function BookTwo({book, books, setBooks}) {
        navigate(`/update/${book.id}`);
     }
     const deleteBook = async (id) => {
-        console.log(id);
        try{
-         await deleteDoc(doc(db, "Books", id));
-        setBooks(books.filter((b) => b.id !== id));
+         await deleteDoc(doc(db, "BookTwo", id));
+         setBooks(books.filter((b) => b.id !== id));
        }catch(err){
           console.log(err)
        }
@@ -22,12 +21,12 @@ function BookTwo({book, books, setBooks}) {
   return (
     <Container>
       <ImgCon>
-        <HyperLink to={'/books/ + book.id  ' }>
-          <Img src={book} />
+        <HyperLink to={'/books/ ' + book.id }>
+          <Img src={book.img} />
         </HyperLink>
       </ImgCon>
       <DescriptionCon>
-         <HyperLink to={'/books/ + book.id'  }> <p className="title">The Merry Adventures of Robinhood</p></HyperLink>
+         <HyperLink to={'/books/'   + book.id }> <p className="title">The Merry Adventures of Robinhood</p></HyperLink>
           <small>by: James Corden</small>
           <p>4.5 <i className="fa-solid fa-star"></i></p>
           <p className="price">255$</p>

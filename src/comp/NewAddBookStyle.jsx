@@ -427,12 +427,22 @@ export const Button = styled.button`
     &:active{
         background-color: white;
         color: #4b93ab;
-        border: 1px solid #95d7ee;
+        border: 2px solid #95d7ee;
     }
     @media(max-width: 800px){
         width: 90%;
         margin: 1rem;
     }
+            
+    ${props => props.disabled && css`{
+        cursor: not-allowed;
+        &:hover{
+            background-color: #70c7e4;    
+        }
+        &:active{
+            background-color: #70c7e4;    
+        }
+    }`}
     
 `
 export const ErrorMessage = styled.div`

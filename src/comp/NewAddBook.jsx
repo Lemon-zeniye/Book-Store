@@ -3,26 +3,22 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "../fireBaseConfig";
 import {Container, BookContainer,InputContainer,TitleContainer, FieldContainer,AuthorsContainer, SingleAuthorCon,PublisherContainer, ImageContainer,ImageCon, Img, Button,ButtonCon, ErrorMessage } from "./NewAddBookStyle";
 import { useForm } from "react-hook-form";
-// import { useParams } from "react-router-dom";
-// import { db } from "../fireBaseConfig";
-// import { getDoc, doc } from "firebase/firestore";
 
-const  NewAddBook = ({authors, onSubmitHandeler ,RemoveAuthor, IncreasAuthor}) => {
+
+const  NewAddBook = ({authors,bookk, updateBookFun,id, onSubmitHandeler ,RemoveAuthor, IncreasAuthor}) => {
         const [image, setImage] = useState(null);
         const [imgUrl, setImgUrl] = useState("");
         const [percent, setPercent] = useState(0);
-        const { register, handleSubmit,   formState: { errors } } = useForm();
+        const { register, handleSubmit, setValue,  formState: { errors } } = useForm();
 
-    //     const fields = ['ISBN','title','category', 'condition', 'coverType','date', 'description', 'fName0', 'lName0',  'mName0',  'pCity', 'pName', 'pages', 'price', 'psubSity'];
-    //    const book =  {ISBN: bookk.ISBN,title: bookk.title,category: bookk.category, condition: bookk.condition, coverType: bookk.coverType,date: bookk.date, description: bookk.description, fName0: bookk.fName0, lName0: bookk.lName0,  mName0: bookk.mName0,  pCity: bookk.pCity, pName: bookk.pName, pages: bookk.pages, price: bookk.price, psubSity:bookk.psubSity};
-         
+      //setValue of many Inputs
+       useEffect(() => {
+            if (bookk) {
+                Object.entries(bookk).forEach(
+                    ([name, value]) => setValue(name, value));
+                }
+            }, [setValue, bookk]);
         
-        // useEffect(() => {
-        //     if(bookk) {
-        //         fields.forEach(field => 
-        //         setValue(field, book.field));
-        //     }
-        // }, []);
 
         // to upload an image
         useEffect(() => {
@@ -45,6 +41,8 @@ const  NewAddBook = ({authors, onSubmitHandeler ,RemoveAuthor, IncreasAuthor}) =
             }
             image && uploadImage();
         },[image]);
+
+        //error messages 
         const registerOptions = {
             title: { required: "Title is required",
                     maxLength: {
@@ -112,11 +110,20 @@ const  NewAddBook = ({authors, onSubmitHandeler ,RemoveAuthor, IncreasAuthor}) =
                 required: "Cover Image is reequired!"
             }
         }
+
+        //submit handeler functions update or add
         const submithandler = (data) => {
             const book = {...data, img: imgUrl};
-            onSubmitHandeler(book);
+            // const bookone = {title: data.title, ISBN: data.ISBN, pages: data.pages, price: data.price, pName: data.pName, pCity: data.pCity, category: data.category, coverType: data. psubSity: data.psubSity, descriptioin: data.descriptioin, authors: [{fName: data.fName0,mName: data.mName0, lName: data.lName0}, {fName: data.fName1, mName: data.mName1, lName: data.lName1}],img: imgUrl};
+            if(id){
+                updateBookFun(book);
+            }else{
+                onSubmitHandeler(book);
+            }
             
         }
+        
+        //handle error message
         const handleError = (errors) => {
             console.log(errors);
         }
@@ -241,7 +248,7 @@ const  NewAddBook = ({authors, onSubmitHandeler ,RemoveAuthor, IncreasAuthor}) =
                 {
                     authors.map((author, index) => (
                         <SingleAuthorCon key={index}>
-                            <h4>Author {index + 1} <i  className="fa-regular fa-circle-xmark" onClick={() => RemoveAuthor(authors)}></i> </h4>
+                            <h4>Author {index + 1} <i  className="fa-regular fa-circle-xmark" onClick={() => RemoveAuthor(author, index)}></i> </h4>
                             <FieldContainer author >
                                 <div className="custom-field" >
                                     <input type="text" name={"fName"+ index } {...register(`${'fName' + index}`, registerOptions.fName)} className= "valid" />
@@ -301,11 +308,13 @@ const  NewAddBook = ({authors, onSubmitHandeler ,RemoveAuthor, IncreasAuthor}) =
                  </small>
                 <p>uploading {Math.round(percent)} %</p>
              </label>
-             <Img src={imgUrl}  alt="cover page Image"/>
+             <Img src={imgUrl ? imgUrl : bookk.img }  alt="cover page Image"/>
          </ImageCon>
         </ImageContainer>
         <ButtonCon>
-            <Button>Submit</Button>
+          {
+            percent > 0 && percent < 100 ? <Button disabled>Submit</Button> : <Button >Submit</Button>
+          }
         </ButtonCon>
     </BookContainer>
     </form>

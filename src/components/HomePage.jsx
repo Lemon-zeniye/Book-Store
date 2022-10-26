@@ -1,17 +1,15 @@
-import styled from "styled-components";
+import styled, {keyframes, css} from "styled-components";
 import book1 from "../images/book1.avif";
 import book from "../images/book.jpg";
 import book4 from '../images/book4.jpg';
-import book2 from "../images/cover3.jpg";
-import book3 from "../images/cover7.jpg";
 import BookStore from "./BookStore";
 import { Link } from "react-router-dom";
-import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';
+// import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';
 import { useState } from "react";
-import { Splide, SplideSlide } from "@splidejs/react-splide";
+// import { Splide, SplideSlide } from "@splidejs/react-splide";
 const HomePage = () => {
     const [search, setSearch] = useState('');
-    const imgs = [book, book1, book4,book2,book3];
+    // const imgs = [book, book1, book4,book2,book3];
     return(
     <BigCon>
         <Container>
@@ -30,23 +28,9 @@ const HomePage = () => {
             </InnerContainer>
         
             <ImgContainer id="reactive">
-                <Splide  options={{type: 'loop', pauseOnFocus: false, pauseOnHover: false,perPage:1, height: "25rem", width: "30rem",   focus:"center", pagination: false, arrows: false, 
-                    autoScroll: {
-                        speed: 1.3,
-                    }, }} extensions={{AutoScroll}} >
-                    {
-                        imgs.map(img => (
-                            <SplideSlide key={img} >
-                                <div>
-                                    <img className="below" src={img}  alt=""/>
-                                </div>
-                            </SplideSlide>
-                        ))
-                    }
-                </Splide>
-               {/* <img className="below" src={book}  alt=""/>
-               <img className="top" src={book4}  alt=""/>
-               <img className="left" src={book1}  alt=""/> */}
+               <Img below className="below" src={book}  alt=""/>
+               <Img top className="top" src={book4}  alt=""/>
+               <Img left className="left" src={book1}  alt=""/>
             </ImgContainer>
         </Container>
         <BookStore search={search} />
@@ -62,11 +46,12 @@ const BigCon = styled.div`
 `
 const Container = styled.div`
     display: flex;
-    min-height: 75vh;
+    max-height: 75vh;
     background-color: #f5f0f8;
     padding: 1rem;
 
 `
+
 const InnerContainer = styled.div`
     flex: 1;
     margin: 5rem;
@@ -124,40 +109,61 @@ const InnerContainer = styled.div`
 `
 const ImgContainer = styled.div`
     flex: 1;
-    margin: auto auto;
-    /* display: flex;
+    display: flex;
     margin-left: 1rem;
     align-items: center;
     justify-content: center;
-    flex-direction: column; */
+    flex-direction: column;
+    position: relative;
     @media(max-width: 800px){
         display: none;
     }
-    img{
+       
+`
+
+const AnimationName = keyframes`
+        0%{
+            opacity: 0;
+        }
+        50%{
+            opacity: 1;
+        }
+        100%{
+            opacity: 0;
+        }
+`
+const Img = styled.img`
         width: 20rem;
         height: 27rem;
         object-fit: fill;
         position: absolute;
-        /* border: 1px solid black; */
-        margin: 0 auto;
-        box-shadow: 0px 0px 8px 2px #cfd8f4;
+        box-shadow: 0px 0px 8px 2px #97aae2;
         padding: .5rem
-    }
+        animation: ${AnimationName} 5s linear infinite;
+        ${props => props.below && css`{
+            z-index: 10;
+            right: 10%;
+            top: 18%;
+        }
+        `}
+        ${props => props.top && css`{
+            top: 0;
+            left: 30%;
+        }`}
+        ${props => props.left && css`{
+            left: 20%;
+            top: 12%;
+            z-index: 11;
+        }`}
+    
     /* .below{
-        z-index: 10;
-        right: 20%;
-        top: 15%;
+        
     }
     .top{
-        top: 0;
-        right: 30%;
+        
     }
     .left{
-        left: 20%;
-        top: 5%;
-        z-index: 11;
+        
     } */
-    
-    
 `
 export default HomePage;

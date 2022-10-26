@@ -1,56 +1,63 @@
-import { useState } from "react";
-// import { db } from "../fireBaseConfig";
-// import { collection, addDoc, doc, getDoc } from "firebase/firestore";
+import { useState, useEffect } from "react";
+import { db } from "../fireBaseConfig";
+import { collection, addDoc,updateDoc , doc, getDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import NewAddBook from "./NewAddBook";
-// import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 // import ListOfBook from "./ListOfBook";
 
 const AddBook = () => {
-    // const [bookk, setBook] = useState([]);
+    const [bookk, setBook] = useState([]);
     const navigate = useNavigate();
+    const { id } = useParams()
     // add book to the firebase collection
     const onSubmitHandeler = async (book) => {
-        // const booksCollectonRef = collection(db, "Books");
-        // await addDoc(booksCollectonRef, book);
+        const booksCollectonRef = collection(db, "BookTwo");
+        await addDoc(booksCollectonRef, book);
         navigate("/");    
     }
+    const updateBookFun = async (book) => {
+      const docRef = doc(db, "BookTwo", id);
+        await updateDoc(docRef, book);
+        navigate("/");
+    }
+
+    const numOfAuthor = 1;
     const [authors, setAuthor] = useState([1]);
     const IncreasAuthor = (num) => {
         if(authors.length < 5){
-          setAuthor((p) => [...p,num]);
+          setAuthor((p) => [...p,numOfAuthor]);
         }
     }
-    const RemoveAuthor = (nums) => {
-      console.log(nums)
-        if(authors.length > 1){
-          const newArr = nums.pop();
-          setAuthor(newArr);
-        }
+    const RemoveAuthor = (newAuthous, index) => {
+      if(authors.length > 1){
+          setAuthor(authors.filter((author, ind) => ind !== index));
+      }
     }
-    // const { id } = useParams()
-        // const docRef = doc(db, "Books", id);
-        // useEffect(() => {
-        //     if(id){
-        //         const getDataById = async () => {
-        //             try {
-        //                 const docSnap = await getDoc(docRef);
-        //                 if(docSnap.exists()){
-        //                     setBook(docSnap.data());
-        //                 }else{
-        //                     console.log("Document dose not eists");
-        //                 }
-        //             }catch(err){
-        //                 console.log(err);
-        //             }
-        //         }
-        //         getDataById();
-        //     }
-        // },[]);
+
+    //to get a single book to update
+        useEffect(() => {
+            if(id){
+                const docRef = doc(db, "BookTwo", id);
+                const getDataById = async () => {
+                    try {
+                        const docSnap = await getDoc(docRef);
+                        if(docSnap.exists()){
+                            setBook(docSnap.data());
+                        }else{
+                            console.log("Document dose not eists");
+                        }
+                    }catch(err){
+                        console.log(err);
+                    }
+                }
+                getDataById();
+            }
+        },[id]);
   return  (
   <>
-    <NewAddBook onSubmitHandeler={onSubmitHandeler}  authors={authors} setAuthor={setAuthor} IncreasAuthor={IncreasAuthor} RemoveAuthor={RemoveAuthor}  />
+    <NewAddBook onSubmitHandeler={onSubmitHandeler}  authors={authors} setAuthor={setAuthor} IncreasAuthor={IncreasAuthor} id={id} updateBookFun={updateBookFun} RemoveAuthor={RemoveAuthor} bookk={bookk} />
   </>
   )
 }
