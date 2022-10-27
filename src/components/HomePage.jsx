@@ -1,11 +1,11 @@
-import styled, {keyframes, css} from "styled-components";
-import book1 from "../images/book1.avif";
-import book from "../images/book.jpg";
-import book4 from '../images/book4.jpg';
+import styled  from "styled-components";
+import book from "../images/book1.avif";
+import book4 from "../images/book.jpg";
+import book1 from '../images/cover13.gif';
 import BookStore from "./BookStore";
 import { Link } from "react-router-dom";
-// import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';
 import { useState } from "react";
+// import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';
 // import { Splide, SplideSlide } from "@splidejs/react-splide";
 const HomePage = () => {
     const [search, setSearch] = useState('');
@@ -28,9 +28,9 @@ const HomePage = () => {
             </InnerContainer>
         
             <ImgContainer id="reactive">
-               <Img below className="below" src={book}  alt=""/>
-               <Img top className="top" src={book4}  alt=""/>
-               <Img left className="left" src={book1}  alt=""/>
+               <img  className="below" src={book}  alt=""/>
+               <img  className="top" src={book4}  alt=""/>
+               <img  className="left" src={book1}  alt=""/>
             </ImgContainer>
         </Container>
         <BookStore search={search} />
@@ -46,7 +46,7 @@ const BigCon = styled.div`
 `
 const Container = styled.div`
     display: flex;
-    max-height: 75vh;
+    max-height: 73vh;
     background-color: #f5f0f8;
     padding: 1rem;
 
@@ -118,52 +118,33 @@ const ImgContainer = styled.div`
     @media(max-width: 800px){
         display: none;
     }
-       
-`
-
-const AnimationName = keyframes`
-        0%{
-            opacity: 0;
-        }
-        50%{
-            opacity: 1;
-        }
-        100%{
-            opacity: 0;
-        }
-`
-const Img = styled.img`
-        width: 20rem;
-        height: 27rem;
+    img{
+        width: 15rem;
+        height: 20rem;
         object-fit: fill;
         position: absolute;
         box-shadow: 0px 0px 8px 2px #97aae2;
-        padding: .5rem
-        animation: ${AnimationName} 5s linear infinite;
-        ${props => props.below && css`{
-            z-index: 10;
-            right: 10%;
-            top: 18%;
-        }
-        `}
-        ${props => props.top && css`{
-            top: 0;
-            left: 30%;
-        }`}
-        ${props => props.left && css`{
-            left: 20%;
-            top: 12%;
-            z-index: 11;
-        }`}
-    
-    /* .below{
-        
+        padding: .5rem;
+        background-color: white; 
+    }
+    .below{
+        z-index: 10;
+        right: 17%;
+        top: 10%;
     }
     .top{
-        
+        top: 0;
+        left: 30%;
     }
     .left{
-        
-    } */
+        left: 20%;
+        top: 14%;
+        z-index: 11;
+    }
+       
 `
+
+
+
+
 export default HomePage;
