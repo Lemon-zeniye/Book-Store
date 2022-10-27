@@ -32,7 +32,7 @@ function BookTwo({book, books, setBooks}) {
           <p className="price">255$</p>
       </DescriptionCon>
       <ButtonCon>
-          <Button onClick={() => updateBook(book)} >Edit</Button>
+          <Button onClick={() => updateBook(book, setBooks)} >Edit</Button>
           <Button delete onClick={() => deleteBook(book.id)} >Delete</Button>
       </ButtonCon>
     </Container>
@@ -45,6 +45,7 @@ const Container = styled.div`
     margin-top: 1rem;
     box-shadow: 0px 0px 8px 2px #cfd8f4;
     border: none;
+    padding-bottom: 1rem;
     border-radius: .3rem;
     @media(max-width: 800px){
       width: 100%;

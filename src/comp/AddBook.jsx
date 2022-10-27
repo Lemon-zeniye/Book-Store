@@ -5,10 +5,12 @@ import { useNavigate } from "react-router-dom";
 import NewAddBook from "./NewAddBook";
 import { useParams } from "react-router-dom";
 
+
 // import ListOfBook from "./ListOfBook";
 
 const AddBook = () => {
     const [bookk, setBook] = useState([]);
+    // const [books, setBooks] = useContext(BooksContext);
     const navigate = useNavigate();
     const { id } = useParams()
     // add book to the firebase collection

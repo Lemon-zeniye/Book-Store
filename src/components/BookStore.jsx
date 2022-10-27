@@ -1,13 +1,32 @@
   import styled from "styled-components";
-  import { useContext  } from "react";
-  import { BooksContext} from "./BooksContext";
+  import {  useState, useEffect  } from "react";
+  // import { BooksContext} from "./BooksContext";
+  import { collection, getDocs } from "firebase/firestore";
+  import { db } from "../fireBaseConfig";
   // import { Splide, SplideSlide } from '@splidejs/react-splide';
   // import '@splidejs/react-splide/css';
   // import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';
   import BookTwo from "./BookTwo";
 
   const BookStore = ({search}) => {
-      const [books, setBooks] = useContext(BooksContext);
+      const [books, setBooks] = useState([]);
+
+      useEffect(() => {
+      const getBooks = async () => {
+      const booksCollectonRef = collection(db, "BookTwo");
+        try{
+          const data = await getDocs(booksCollectonRef);
+          if(data){
+              setBooks(data.docs.map(doc => ({...doc.data(), id: doc.id})));
+          } else{
+              console.log('Documents do not exist!')
+          }
+        }catch(error){
+          console.log(error);
+        }
+      }
+      getBooks()
+  },[]);
       return(
         <Container>
           <InnerContainer>
@@ -20,7 +39,7 @@
                   {
                       books.map(best => (
                       // <SplideSlide key={best.id} >
-                        <div key={best.id} className="inner">
+                        <div key={best.img} className="inner">
                           <BookTwo key={best} book={best} books={books} setBooks={setBooks}/>
                         </div>
                       // </SplideSlide>
@@ -42,9 +61,12 @@
       div.div{
         display: flex;
         padding-bottom: 5rem;
+        flex-wrap: wrap;
+        justify-content: space-around;
       }
       .inner{
         margin: 0 1rem;
+        padding-bottom: 1rem;
       }
       h2{
         color: #222246;
