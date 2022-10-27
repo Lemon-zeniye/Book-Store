@@ -26,10 +26,10 @@ function BookTwo({book, books, setBooks}) {
         </HyperLink>
       </ImgCon>
       <DescriptionCon>
-         <HyperLink to={'/books/'   + book.id }> <p className="title">The Merry Adventures of Robinhood</p></HyperLink>
-          <small>by: James Corden</small>
+         <HyperLink to={'/books/'   + book.id }> <p className="title">{book.title}</p></HyperLink>
+          <small>by: {book.fName0} {book.mName0 ? book.mName0 : ""} {book.lName0 ? book.lName0 : ""}</small>
           <p>4.5 <i className="fa-solid fa-star"></i></p>
-          <p className="price">255$</p>
+          <p className="price">{book.price} $</p>
       </DescriptionCon>
       <ButtonCon>
           <Button onClick={() => updateBook(book, setBooks)} >Edit</Button>
@@ -78,12 +78,15 @@ const Img = styled.img`
 `
 const DescriptionCon = styled.div`
   padding: .5rem;
+  width: 100%;
   p{
     margin: .2rem 0;
   }
   .title{
-    line-height: 1.2;
+    line-height: 1.3;
     cursor: pointer;
+    width: 100%;
+    word-break: break-all;
     &:hover{
       color: #3939b1;
     }

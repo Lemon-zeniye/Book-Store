@@ -188,7 +188,9 @@ justify-content: space-between;
             box-shadow: 0px 0px 8px 2px #dfe4f2;
             border-radius: .2rem;
             letter-spacing: 1px;
-            
+            &::placeholder{
+                color: black;
+            }
             &:focus{
                 border-bottom: 1px solid #8b9fe8;
                 box-shadow: 0 6px 6px -6px #6e83d1;
@@ -199,22 +201,7 @@ justify-content: space-between;
         input[type=number]::-webkit-outer-spin-button { 
         -webkit-appearance: none;
         }
-        input[type="date"]{
-            padding: 12px;
-            width: 100%;
-            box-shadow: 0px 0px 8px 2px #dfe4f2;
-            border-radius: .2rem;
-            font-family: 'Noto Sans', sans-serif;
-            cursor: pointer;
-            @media(max-width: 800px){
-                width: 100%;
-                margin: .5rem 0;
-            }
-            &:focus{
-                box-shadow: 0px 0px 8px 2px #91a6e0;
-                border: none;
-            }
-        }
+        
         
         .placeholder{
             font-size: 17px;
@@ -229,6 +216,10 @@ justify-content: space-between;
             display: flex;
             @media(max-width: 800px){
                 top: 0;
+            }
+            span.dolar{
+             color: #40ec40;
+             font-weight: bold;
             }
             span.requiredStar{
                 color: red;

@@ -46,8 +46,8 @@ const  NewAddBook = ({authors,bookk, updateBookFun,id, onSubmitHandeler ,RemoveA
         const registerOptions = {
             title: { required: "Title is required",
                     maxLength: {
-                        value: 25,
-                        message: "Title should not have more than 10 characters!"
+                        value: 30,
+                        message: "Title should not have more than 30 characters!"
                     }
              },
             ISBN: { required: "ISBN is required",
@@ -60,7 +60,7 @@ const  NewAddBook = ({authors,bookk, updateBookFun,id, onSubmitHandeler ,RemoveA
                         message: "ISBN shouldn't be more than 15 characters!"
                     }
             },
-            price : { required: "Price is required!", valueAsNumber: true, },
+            price : { required: "Price is required!" },
             pages : { required: "Pages is required!", valueAsNumber: true, },
             date: { required: "Year of Published is required!"},
             description: { required: "Description is required!",
@@ -107,7 +107,7 @@ const  NewAddBook = ({authors,bookk, updateBookFun,id, onSubmitHandeler ,RemoveA
                 }
             },
             img: {
-                required: "Cover Image is reequired!"
+                
             }
         }
 
@@ -153,8 +153,8 @@ const  NewAddBook = ({authors,bookk, updateBookFun,id, onSubmitHandeler ,RemoveA
                         </small>
                     </div>
                     <div className="custom-field" >
-                        <input  type="number" name='price' {...register('price', registerOptions.price)} className="valid"  />
-                        <span className="placeholder">Price <span className="requiredStar"> *</span> </span>
+                        <input  type="number" step="any" name='price' {...register('price', registerOptions.price)} className="valid"  />
+                        <span className="placeholder"> <span className="dolar" > $</span> Price <span className="requiredStar"> *</span> </span>
                         <small className='errorMessage'>
                             {errors?.price && errors.price.message}
                         </small>
@@ -209,7 +209,7 @@ const  NewAddBook = ({authors,bookk, updateBookFun,id, onSubmitHandeler ,RemoveA
                         </small>
                     </label>
                     <label htmlFor="date" className="custom-field last-field" >
-                        <input id="date"  name='date' {...register('date', registerOptions.date)} type="date"   className="date" />
+                        <input id="date" placeholder='Published Year' type="text" onFocus={e => e.target.type = "date"}  name='date' {...register('date', registerOptions.date)}   className="date" />
                         <small className='errorMessage'>
                             {errors?.date && errors.date.message}
                         </small>
