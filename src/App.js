@@ -6,7 +6,6 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import BookDetail from "./components/BookDetail";
 import {BrowserRouter , Route, Routes } from "react-router-dom";
-import { BooksProvider } from "./components/BooksContext";
 import Favorite from "./components/Favorite";
 import BookStore from "./components/BookStore";
 import BookOnCart from "./components/BookOnCart";
@@ -16,7 +15,6 @@ const App = () => {
 const [search, setSearch] = useState("");
   return( 
   <Main>
-    <BooksProvider>
       <BrowserRouter>
         <Navbar setSearch={setSearch} />
         <BigContainer>
@@ -33,7 +31,6 @@ const [search, setSearch] = useState("");
           </Routes>
         </BigContainer>
       </BrowserRouter>
-    </BooksProvider>
 </Main>
   )
 }
