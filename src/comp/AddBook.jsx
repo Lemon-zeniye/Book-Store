@@ -37,6 +37,7 @@ const AddBook = () => {
           setAuthor(authors.filter((author, ind) => ind !== index));
       }
     }
+   
 
     //to get a single book to update
         useEffect(() => {

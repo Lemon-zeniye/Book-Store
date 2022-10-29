@@ -1,25 +1,25 @@
-import { useState } from "react";
 import HomePage from "./components/HomePage";
 import Navbar from "./components/Navbar";
 import styled from "styled-components";
-import Login from "./components/Login";
-import Register from "./components/Register";
-import BookDetail from "./components/BookDetail";
 import {BrowserRouter , Route, Routes } from "react-router-dom";
-import Favorite from "./components/Favorite";
-import BookStore from "./components/BookStore";
-import BookOnCart from "./components/BookOnCart";
 import AddBook from "./comp/AddBook";
+// import { useState } from "react";
+// import Login from "./components/Login";
+// import Register from "./components/Register";
+// import BookDetail from "./components/BookDetail";
+// import Favorite from "./components/Favorite";
+// import BookStore from "./components/BookStore";
+// import BookOnCart from "./components/BookOnCart";
 
 const App = () => {
-const [search, setSearch] = useState("");
+// const [search, setSearch] = useState("");
   return( 
   <Main>
       <BrowserRouter>
-        <Navbar setSearch={setSearch} />
+      <Navbar />
         <BigContainer>
           <Routes>
-              <Route exact path="/" element={<HomePage />} />
+              {/* <Route exact path="/" element={<HomePage />} />
               <Route path="login" element={<Login /> }/>
               <Route exact path="register" element={<Register />} /> 
               <Route exact path="books/:BookId" element={<BookDetail />} />
@@ -27,7 +27,9 @@ const [search, setSearch] = useState("");
               <Route exact path="bookStore" element={<BookStore search={search} />} />
               <Route exact path="cart" element={<BookOnCart  />} />
               <Route exact path="addBook" element={<AddBook />} />
-              <Route exact path="update/:id" element={<AddBook />} />
+              <Route exact path="update/:id" element={<AddBook />} /> */}
+              <Route exact path="/" element={<HomePage />} />
+              <Route exact path="/addBook" element={<AddBook/>} />
           </Routes>
         </BigContainer>
       </BrowserRouter>

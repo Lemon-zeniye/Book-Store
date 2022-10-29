@@ -1,25 +1,28 @@
 import styled from "styled-components";
-import avater from "../images/th.jpg";
+// import avater from "../images/th.jpg";
 import {Link} from "react-router-dom";
 const Navbar = ({setSearch}) => {
     return(
-        <Container>
-            <Hyperlink to="/">Books</Hyperlink>
-            <ul>
-                {/* <FavLink to="/bookstore">Book Store</FavLink>
-                <FavLink to="/favorite">My Favorite</FavLink> */}
-                <input type="text" onChange={(e) => setSearch(e.target.value)} placeholder="search for your favorite book" />
-                <Button>Search</Button>
-            </ul>
-            <div>
-                <p>Hi, Lee</p>
-                <img src={avater} alt="" />
-            </div>
-             <Link to="addBook" > <Button2>Add Book</Button2></Link> 
-            <FavLink to="/cart">
-                <i className="fa-sharp fa-solid fa-cart-shopping"></i>
-            </FavLink>
-        </Container>
+    <Container>
+         <Link to="addBook" > <Button2>Add Book</Button2></Link> 
+    </Container>
+        // <Container>
+        //     <Hyperlink to="/">Books</Hyperlink>
+        //     <ul>
+        //         {/* <FavLink to="/bookstore">Book Store</FavLink>
+        //         <FavLink to="/favorite">My Favorite</FavLink> */}
+        //         <input type="text" onChange={(e) => setSearch(e.target.value)} placeholder="search for your favorite book" />
+        //         <Button>Search</Button>
+        //     </ul>
+        //     <div>
+        //         <p>Hi, Lee</p>
+        //         <img src={avater} alt="" />
+        //     </div>
+        //      <Link to="addBook" > <Button2>Add Book</Button2></Link> 
+        //     <FavLink to="/cart">
+        //         <i className="fa-sharp fa-solid fa-cart-shopping"></i>
+        //     </FavLink>
+        // </Container>
     )
 }
 const Container = styled.div`
@@ -80,29 +83,29 @@ const Container = styled.div`
         }
     }
 `
-const Hyperlink = styled(Link)`
-        margin: 0 .3rem;
-        cursor: pointer;
-        color: #1d8c7f;
-        text-decoration: none;
-        font-size: 1.5rem;
-        font-weight: bold;
-        &:hover{
-            color: #22c2b0;
-        }
-`
- const Button = styled.button`
-        border: none;
-        padding: .2rem 1rem;
-        background-color: #1d8c7f;
-        color: white;
-        cursor: pointer;
-        outline: none;
-        &:hover{
-            background-color: #1eb8a6;
-        }
+// const Hyperlink = styled(Link)`
+//         margin: 0 .3rem;
+//         cursor: pointer;
+//         color: #1d8c7f;
+//         text-decoration: none;
+//         font-size: 1.5rem;
+//         font-weight: bold;
+//         &:hover{
+//             color: #22c2b0;
+//         }
+// `
+//  const Button = styled.button`
+//         border: none;
+//         padding: .2rem 1rem;
+//         background-color: #1d8c7f;
+//         color: white;
+//         cursor: pointer;
+//         outline: none;
+//         &:hover{
+//             background-color: #1eb8a6;
+//         }
 
- `
+//  `
  const Button2 = styled.button`
         margin: .5rem;
         padding: .3rem 1rem;
@@ -115,17 +118,14 @@ const Hyperlink = styled(Link)`
             background-color: #2c6e66;
         }
  `
-            
-    
-
-const FavLink = styled(Link)`
-    margin: 0 .3rem;
-    cursor: pointer;
-    text-decoration: none;
-    color: black;
-    @media(max-width: 800px){
-        margin: 0 .4rem;
-    }
-`
+// const FavLink = styled(Link)`
+//     margin: 0 .3rem;
+//     cursor: pointer;
+//     text-decoration: none;
+//     color: black;
+//     @media(max-width: 800px){
+//         margin: 0 .4rem;
+//     }
+// `
 
 export default Navbar;

@@ -30,7 +30,7 @@
       return(
         <Container>
           <InnerContainer>
-              <h2>BestSeller Books</h2>
+              <h2>List of Books</h2>
               <div className="div">
                   {/* <Splide options={{type: 'loop',arrows:false, autoWidth:true,  pagination: false, drag: 'free', gap: '1rem', focus:"center",
                     autoScroll: {
@@ -39,7 +39,7 @@
                   {
                       books.map(best => (
                       // <SplideSlide key={best.id} >
-                        <div key={best.img} className="inner">
+                        <div key={best.id} className="inner">
                           <BookTwo key={best} book={best} books={books} setBooks={setBooks}/>
                         </div>
                       // </SplideSlide>

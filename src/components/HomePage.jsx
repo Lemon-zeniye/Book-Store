@@ -3,12 +3,11 @@ import book from "../images/book1.avif";
 import book4 from "../images/book.jpg";
 import book1 from '../images/cover13.gif';
 import BookStore from "./BookStore";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+// import { Link } from "react-router-dom";
+// import { useState } from "react";
 // import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';
 // import { Splide, SplideSlide } from "@splidejs/react-splide";
 const HomePage = () => {
-    const [search, setSearch] = useState('');
     // const imgs = [book, book1, book4,book2,book3];
     return(
     <BigCon>
@@ -17,14 +16,14 @@ const HomePage = () => {
                 <h1>Buy and Sell your textbook for best price</h1>
                 <p>Lorem  dignissimos eum doloremque, voluptate impedit iusto in nobis. Nobis, numquam adipisci.
                 </p>
-                <form>
+                {/* <form>
                     <input onChange={(e) => setSearch(e.target.value)} type="text" placeholder="search for books" />
                     <button>Search</button>
                 </form>
                 <div>
                    <Link to="login"><button className="login">Login</button></Link> 
                    <Link to="register" ><button className="registor">Registor</button></Link>
-                </div>
+                </div> */}
             </InnerContainer>
         
             <ImgContainer id="reactive">
@@ -33,7 +32,7 @@ const HomePage = () => {
                <img  className="left" src={book1}  alt=""/>
             </ImgContainer>
         </Container>
-        <BookStore search={search} />
+        <BookStore />
     </BigCon>
     )
 }
